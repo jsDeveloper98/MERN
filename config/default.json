@@ -1,0 +1,5 @@
+{
+  "port": 5000,
+  "jwtSecret": "qwerty",
+  "mongoUri": "mongodb+srv://Hovhannes:hov.boy1998@cluster0.hzqpi.gcp.mongodb.net/app?retryWrites=true&w=majority"
+}
