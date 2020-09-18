@@ -4,6 +4,7 @@ import { useRoutes } from "./routes";
 import { BrowserRouter as Router } from "react-router-dom";
 import { useAuth } from "./hooks/auth-hook";
 import { AuthContext } from "./context/auth-context";
+import { NavbarComponent } from "./components/nav-bar";
 
 const App = () => {
   const { token, login, logout, userId } = useAuth();
@@ -17,10 +18,13 @@ const App = () => {
         userId,
         login,
         logout,
-        isAuhtenticated,
+        isAuthenticated,
       }}
     >
-      <Router>{routes}</Router>;
+      <Router>
+        {isAuthenticated && <NavbarComponent />}
+        <div className="container">{routes}</div>
+      </Router>
     </AuthContext.Provider>
   );
 };

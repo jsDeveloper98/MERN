@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { useContext } from "react";
 import { Form, Button } from "react-bootstrap";
+import { AuthContext } from "../context/auth-context";
 import { useHttp } from "../hooks/http-hook";
 import { useMessage } from "../hooks/messages-hook";
 
 const Auth = () => {
+  const auth = useContext(AuthContext);
   const { loading, error, request, clearError } = useHttp();
   const message = useMessage();
 
@@ -21,21 +24,19 @@ const Auth = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleRegister = async (e) => {
-    e.stopPropagation();
-    e.preventDefault();
-    try {
-      const data = await request("/api/auth/register", "POST", { ...form });
-      message(data.message);
-    } catch (e) {}
-  };
+  // const handleRegister = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const data = await request("/api/auth/register", "POST", { ...form });
+  //     message(data.message);
+  //   } catch (e) {}
+  // };
 
   const handleLogin = async (e) => {
-    e.stopPropagation();
     e.preventDefault();
     try {
       const data = await request("/api/auth/login", "POST", { ...form });
-      message(data.message);
+      auth.login(data.token, data.userId);
     } catch (error) {}
   };
 
