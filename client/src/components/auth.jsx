@@ -24,12 +24,23 @@ const Auth = () => {
   const handleRegister = async (e) => {
     e.stopPropagation();
     e.preventDefault();
-    const data = await request("/api/auth/register", "POST", { ...form });
-    console.log({ data });
+    try {
+      const data = await request("/api/auth/register", "POST", { ...form });
+      message(data.message);
+    } catch (e) {}
+  };
+
+  const handleLogin = async (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    try {
+      const data = await request("/api/auth/login", "POST", { ...form });
+      message(data.message);
+    } catch (error) {}
   };
 
   return (
-    <div className="container">
+    <div className="container p-5">
       <Form>
         <Form.Group controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
@@ -56,7 +67,7 @@ const Auth = () => {
 
         <Button
           disabled={loading}
-          onClick={handleRegister}
+          onClick={handleLogin}
           variant="primary"
           type="submit"
         >

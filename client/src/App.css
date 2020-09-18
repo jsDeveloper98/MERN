@@ -1,0 +1,7 @@
+.toast {
+  margin: 0 auto !important;
+  background-color: darkred !important;
+  color: white !important;
+  padding: 4px 12px !important;
+  margin-bottom: 5px !important;
+}
